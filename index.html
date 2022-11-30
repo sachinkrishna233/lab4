@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <style>
+            table,th,td{
+                border: 1px solid;
+            }
+        </style>
+    </head>
+<body>
+
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr>
+        <td id="demo1"></td>
+    </tr>
+</table>
+
+<p id="rm"></p>
+
+<input type="text" name="" id="changetxt">
+
+<button onclick="change()">Change</button>
+<button onclick="removeElem()">Remove</button>
+<button onclick="traverse()">Show Sibiling</button>
+
+<p id="demo"></p>
+
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myFunction(this);
+    }
+};
+xhttp.open("GET", "test1.xml", true);
+xhttp.send();
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var x;
+    tr = xmlDoc.documentElement.childNodes;
+    x = xmlDoc.getElementsByTagName("name")[0].childNodes[0];
+    document.getElementById("demo1").innerHTML = x.nodeValue;
+    console.log(k)
+}
+
+function change(){
+    document.getElementById("rm").innerText = ""
+    x=document.getElementById('changetxt').value
+    document.getElementById("demo1").innerText = x
+}
+
+function removeElem(){
+    // var rmv
+    rmv = document.getElementById('demo1').innerText
+    console.log(rmv)
+    document.getElementById("demo1").innerText = ""
+
+    document.getElementById("rm").innerText = "Removed node value: " + rmv
+}
+
+function traverse(){
+    txt = ""
+    for (i = 0; i < tr.length; i++) { 
+        if (tr[i].nodeType == 1) {
+            txt += tr[i].nodeName + "<br>";
+        }
+    }
+    document.getElementById("demo").innerHTML = txt; 
+}
+</script>
+</body>
+</html>
+
